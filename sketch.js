@@ -1,7 +1,7 @@
 let h, w;
 
 function setup() {
-  createCanvas(1000, 500);
+  createCanvas(500, 500);
   h = height/2;
   w = width/2;
 }
@@ -21,6 +21,26 @@ class gird {
   }
 }
 
+class linear_equation{
+  constructor(h,w,m,c){
+    this.h = h;
+    this.w = w;
+    this.m = -m;
+    this.c = -c;
+  }
+  draw_line(){
+
+    for (var x = -(this.w); x <= this.w; x ++){
+      var x1 = x;
+      var y1 = (this.m)*(x1) + (this.c);
+      var x2 = x;
+      var y2 = (this.m)*(x2) + (this.c);
+      stroke('red');
+      noFill();
+      line(x1, y1, x2, y2);
+    }
+  }
+}
 
 class axis{
   constructor(h, w){
@@ -37,10 +57,12 @@ class axis{
 }
 
 function draw() {
-  translate(w,h);
+  translate(h, w);
   background(250);
   xy_axis = new axis(h, w);
-  grid1 = new gird(height, width);
+  grid1 = new gird(h, w);
+  line1 = new linear_equation(h,w, 1, 0)
   grid1.draw_grid();
   xy_axis.draw_xy();
+  line1.draw_line();
 }
