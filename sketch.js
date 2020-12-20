@@ -1,28 +1,27 @@
 let h, w;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(550, 550);
   h = height/2;
   w = width/2;
-  grad = new InputBox(575, 240, 1, 'Gradient');
-  y_int = new InputBox(650, 240, 0, 'Y-Intercept');
+  grad = new InputBox(675, 1, 'Gradient');
+  y_int = new InputBox(775, 0, 'Y-Intercept');
   xy_axis = new axis(h, w);
   grid1 = new grid(h, w);
 }
 
 class InputBox {
-  constructor(x_pos, y_pos, start_val, title_name){
+  constructor(x_pos, start_val, title_name){
     this.x_pos = x_pos;
-    this.y_pos = y_pos;
     this.start_val = start_val;
     this.box = createInput(this.start_val);
     this.title_name = title_name;
     this.title = createElement('h2', this.title_name);
   }
   show(){
-    this.box.position(this.x_pos, this.y_pos);
+    this.box.position(this.x_pos, 262);
     this.box.size(27, 20);
-    this.title.position(this.x_pos -15, this.y_pos - 40);
+    this.title.position(this.x_pos -15, 222);
     this.title.style('font-size', '15px');
   }
   value(){
@@ -37,11 +36,16 @@ class grid {
     this.w = w
   }
   draw_grid(){
-     for (var i = -(this.w); i < this.w; i += 10) {
+     for (var i = -(this.w); i < this.w; i += 25) {
       stroke(190);
       strokeWeight(1);
       line(i, -(this.h), i, this.h);
       line(this.w, i, -(this.w), i);
+      // Grid labels
+      text(2*i, 2*i + 2, 15);
+      text(-2*i, -18, 2*i -2);
+      textFont("Big Caslon", 9);
+      fill(0);
       }
   }
 }
