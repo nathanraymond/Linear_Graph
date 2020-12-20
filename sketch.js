@@ -4,9 +4,34 @@ function setup() {
   createCanvas(500, 500);
   h = height/2;
   w = width/2;
+  grad = new InputBox(575, 240, 1, 'Gradient');
+  y_int = new InputBox(650, 240, 0, 'Y-Intercept');
+  xy_axis = new axis(h, w);
+  grid1 = new grid(h, w);
 }
 
-class gird {
+class InputBox {
+  constructor(x_pos, y_pos, start_val, title_name){
+    this.x_pos = x_pos;
+    this.y_pos = y_pos;
+    this.start_val = start_val;
+    this.box = createInput(this.start_val);
+    this.title_name = title_name;
+    this.title = createElement('h2', this.title_name);
+  }
+  show(){
+    this.box.position(this.x_pos, this.y_pos);
+    this.box.size(27, 20);
+    this.title.position(this.x_pos -15, this.y_pos - 40);
+    this.title.style('font-size', '15px');
+  }
+  value(){
+    return this.box.value()
+  }
+}
+
+
+class grid {
   constructor(h, w){
     this.h = h
     this.w = w
@@ -33,6 +58,7 @@ class linear_equation{
       var y1 = (this.m)*(x1) + (this.c);
       var x2 = -x1;
       var y2 = (this.m)*(x2) + (this.c);
+      strokeWeight(1.8);
       stroke('red');
       noFill();
       line(x1, y1, x2, y2);  
@@ -56,9 +82,9 @@ class axis{
 function draw() {
   translate(h, w);
   background(250);
-  xy_axis = new axis(h, w);
-  grid1 = new gird(h, w);
-  line1 = new linear_equation(h,w, 1, 0)
+  line1 = new linear_equation(h,w, grad.value(), y_int.value());
+  grad.show()
+  y_int.show()
   grid1.draw_grid();
   xy_axis.draw_xy();
   line1.draw_line();
