@@ -29,16 +29,13 @@ class linear_equation{
     this.c = -c;
   }
   draw_line(){
-
-    for (var x = -(this.w); x <= this.w; x ++){
-      var x1 = x;
+      var x1 = -(this.w);
       var y1 = (this.m)*(x1) + (this.c);
-      var x2 = x;
+      var x2 = -x1;
       var y2 = (this.m)*(x2) + (this.c);
       stroke('red');
       noFill();
-      line(x1, y1, x2, y2);
-    }
+      line(x1, y1, x2, y2);  
   }
 }
 
