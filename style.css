@@ -5,4 +5,13 @@ html, body {
 
 canvas {
   display: block;
+  
+}
+
+h2 {
+  display: block;
+  font-size: 25px;
+ 
+  margin-left: 220px;
+  font-weight: bold;
 }

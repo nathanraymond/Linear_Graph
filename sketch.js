@@ -4,8 +4,9 @@ function setup() {
   createCanvas(550, 550);
   h = height/2;
   w = width/2;
-  grad = new InputBox(675, 1, 'Gradient');
-  y_int = new InputBox(775, 0, 'Y-Intercept');
+  // Declare graph elements
+  grad = new InputBox(455, 1, 'Gradient (m)');
+  y_int = new InputBox(585, 0, 'Y-Intercept (c)');
   xy_axis = new axis(h, w);
   grid1 = new grid(h, w);
 }
@@ -19,10 +20,12 @@ class InputBox {
     this.title = createElement('h2', this.title_name);
   }
   show(){
-    this.box.position(this.x_pos, 262);
+    // Input Box config
+    this.box.position(this.x_pos +234, 322);
     this.box.size(27, 20);
-    this.title.position(this.x_pos -15, 222);
-    this.title.style('font-size', '15px');
+    // Box title config
+    this.title.position(this.x_pos -15, 275);
+    this.title.style('font-size', '17px');
   }
   value(){
     return this.box.value()
@@ -37,6 +40,7 @@ class grid {
   }
   draw_grid(){
      for (var i = -(this.w); i < this.w; i += 25) {
+       // Grid lines
       stroke(190);
       strokeWeight(1);
       line(i, -(this.h), i, this.h);
@@ -54,10 +58,12 @@ class linear_equation{
   constructor(h,w,m,c){
     this.h = h;
     this.w = w;
+    // Invert gradient and y-intercept due to canvas layout
     this.m = -m;
     this.c = -c;
   }
   draw_line(){
+    // y = mx + c between x = -width and x = width
       var x1 = -(this.w);
       var y1 = (this.m)*(x1) + (this.c);
       var x2 = -x1;
@@ -84,9 +90,13 @@ class axis{
 }
 
 function draw() {
+  // Translate canvas to move center point (0,0) to center of canvas
   translate(h, w);
+  // Declare background colour
   background(250);
+  // line1 declared here to allow gradient and y int values to update as input changes
   line1 = new linear_equation(h,w, grad.value(), y_int.value());
+  // Draw graph elements
   grad.show()
   y_int.show()
   grid1.draw_grid();
